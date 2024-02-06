@@ -1,0 +1,8 @@
+{
+    "watch": [
+        "demo/index.html",
+        "scripts/",
+        "abb.js"
+    ],
+    "ext": "*"
+}

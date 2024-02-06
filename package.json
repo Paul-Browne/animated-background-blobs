@@ -1,0 +1,21 @@
+{
+  "name": "animated-background-blobs",
+  "version": "1.0.0",
+  "description": "README.md",
+  "main": "abb.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "nodemon scripts/serve.js",
+    "build": "nodemon scripts/build.js",
+    "start": "npm run build & npm run serve"
+  },
+  "author": "Paul Browne",
+  "license": "ISC",
+  "devDependencies": {
+    "compression": "^1.7.4",
+    "esbuild": "^0.20.0",
+    "express": "^4.18.2",
+    "nodemon": "^3.0.3"
+  }
+}

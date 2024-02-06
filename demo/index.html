@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Background Blobs</title>
+    <script src="/js/abb.iife.min.js"></script>
+    <style>
+        body{
+            margin: 0
+        }
+
+        .hero{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items:center;
+            height: 100vh;
+            width: 100%;            
+        }
+
+        #background-blobs{
+            position: relative;
+        }
+
+        #background-blobs:before,
+        #background-blobs:after{
+            position:absolute;
+            z-index: -1;
+            content: "";
+            top:0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="background-blobs" class="hero">
+        <h1>Hello world!!!</h1>
+        <p>All your content etc.</p>
+    </div>
+
+    <script>
+        abb({
+            element: "#background-blobs",
+            speed: 0.5,
+            opacity: 0.75,
+            grain: {
+                opacity: 0.1,
+                strength: 40
+            }
+        })
+    </script>
+
+</body>
+</html>
