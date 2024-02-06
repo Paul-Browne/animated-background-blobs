@@ -66,13 +66,22 @@ export default abb = ({
   const fps = 60;
   const interval = 1000/fps;
   let then;
+
+  abb.store = abb.store || {};
+
+  if(abb.store[element]){
+    cancelAnimationFrame(abb.store[element])
+  }
+
   function animate(timestamp){
-    requestAnimationFrame(animate);
+    abb.store[element] = requestAnimationFrame(animate);
     then = then ? then : timestamp
     const delta = timestamp - then;
     if(delta > interval){
+      if(!speed){
+        cancelAnimationFrame(abb.store[element])
+      }
       then = timestamp - (delta % interval);
-      
       if(opacity || strength){
         const {width, height} = document.querySelector(element).getBoundingClientRect();
         const makeNoise = loadNoise({
@@ -86,7 +95,7 @@ export default abb = ({
         stylesheet.replaceSync(`${element}:before{opacity:${opacity};background-color:${background};background-image:${updateStyle(points)};}`);      
       }
       points = updatePosition(points);       
-    }    
-  }
-  animate();
+    }
+  }    
+  animate();  
 }
