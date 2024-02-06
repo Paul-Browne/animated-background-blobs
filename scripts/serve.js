@@ -6,6 +6,6 @@ import compression from 'compression'
 const app = express()
 app.use(compression())
 
-app.use("/", express.static("demo"))
+app.use("/", express.static("docs"))
 
 app.listen(3333, () => console.log("http://localhost:3333"))

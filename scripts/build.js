@@ -13,7 +13,7 @@ await Promise.all([
         outfile: 'abb.iife.min.js'
     },
     {
-        outfile: 'demo/js/abb.iife.min.js'
+        outfile: 'docs/js/abb.iife.min.js'
     },
     {
         format: "esm",

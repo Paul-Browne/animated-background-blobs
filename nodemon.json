@@ -1,6 +1,6 @@
 {
     "watch": [
-        "demo/index.html",
+        "docs/index.html",
         "scripts/",
         "abb.js"
     ],
