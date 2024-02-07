@@ -17,7 +17,7 @@ await Promise.all([
     },
     {
         format: "esm",
-        outfile: 'abb.iife.min.js'
+        outfile: 'abb.esm.min.js'
     }        
 ].map(build => esbuild.build({
     ...commonBuildParams,

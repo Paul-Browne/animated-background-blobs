@@ -34,26 +34,30 @@ const updatePosition = points => points.map(p => {
 
 export default abb = ({
   element,
-  background= "hsla(108,44%,72%,1)",
+  background= "#a5d798",
   colors= [
-    "hsla(302,71%,61%,1)",
-    "hsla(36,100%,50%,1)",
-    "hsla(0,100%,50%,1)",
-    "hsla(190,100%,50%,1)",
-    "hsla(261,100%,50%,1)"
+    "red",
+    "violet",
+    "magenta",
+    "cyan",
+    "orange"
   ],
   speed= 1,
   opacity = 1,
+  saturate = 1,
+  invert = false,
+  blur = 0,
   grain: {
+    strength = 1,
     opacity:grainOpacity = 0.5,
-    strength = 1
+    blur:grainBlur = 0
   } = {}
 } = {}) => {
   if(!element) return;
   
   const stylesheet = new CSSStyleSheet();
   document.adoptedStyleSheets = [stylesheet];
-  let points = colors.reverse().map(color => {
+  let points = colors.map(color => {
     return {
       x: Math.random() * 100,
       y: Math.random() * 100,
@@ -82,7 +86,8 @@ export default abb = ({
         cancelAnimationFrame(abb.store[element])
       }
       then = timestamp - (delta % interval);
-      if(opacity || strength){
+      const css = `${element}:before{opacity:${opacity};background-color:${background};background-image:${updateStyle(points)};filter:saturate(${saturate}) invert(${invert?1:0}) blur(${blur}px);}`   
+      if(grainOpacity && strength){
         const {width, height} = document.querySelector(element).getBoundingClientRect();
         const makeNoise = loadNoise({
           width,
@@ -90,12 +95,13 @@ export default abb = ({
           opacity: grainOpacity,
           baseFrequency: 2/strength
         });      
-        stylesheet.replaceSync(`${element}:after{background: url(${makeNoise});}${element}:before{opacity:${opacity};background-color:${background};background-image:${updateStyle(points)};}`);
+        stylesheet.replaceSync(`${element}:after{background:url(${makeNoise});${grainBlur?`filter:blur(${grainBlur}px);`:""}}${css}`);
       }else{
-        stylesheet.replaceSync(`${element}:before{opacity:${opacity};background-color:${background};background-image:${updateStyle(points)};}`);      
+        stylesheet.replaceSync(css);      
       }
       points = updatePosition(points);       
     }
   }    
   animate();  
 }
+
